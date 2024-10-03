@@ -8,8 +8,8 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import uz.ibrohim.meat.HomeActivity
 import uz.ibrohim.meat.databinding.ActivityLoginBinding
-import uz.ibrohim.meat.login.request_response.RequestLogin
-import uz.ibrohim.meat.login.request_response.ResponseLogin
+import uz.ibrohim.meat.login.request_response.LoginRequest
+import uz.ibrohim.meat.login.request_response.LoginResponse
 import uz.ibrohim.meat.login.services.LoginViewModel
 import uz.ibrohim.meat.retrofit.ApiClient
 import uz.ibrohim.meat.retrofit.NetworkHelper
@@ -55,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 val networkHelper = NetworkHelper(this@LoginActivity)
                 val viewModel = LoginViewModel(ApiClient.apiServices, networkHelper)
-                val model = RequestLogin(phone = phone, password = password)
+                val model = LoginRequest(phone = phone, password = password)
                 viewModel.getLogin(body = model)
 
                 lifecycleScope.launchWhenCreated {
@@ -78,7 +78,7 @@ class LoginActivity : AppCompatActivity() {
                             }
 
                             is Resource.Success -> {
-                                savePreferencesNetworkData(it.data as ResponseLogin, phone)
+                                savePreferencesNetworkData(it.data as LoginResponse, phone)
                             }
                         }
                     }
@@ -87,7 +87,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun savePreferencesNetworkData(requestLogin: ResponseLogin, phone: String) {
+    private fun savePreferencesNetworkData(requestLogin: LoginResponse, phone: String) {
         val limit = requestLogin.access
         Preferences.token = limit
         Preferences.phone = phone

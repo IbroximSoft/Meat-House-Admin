@@ -1,24 +1,23 @@
-package uz.ibrohim.meat.login.services
+package uz.ibrohim.meat.category.services
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import uz.ibrohim.meat.login.request_response.LoginRequest
 import uz.ibrohim.meat.retrofit.NetworkHelper
 import uz.ibrohim.meat.retrofit.Resource
 
-class LoginViewModel(apiServices: LoginServices, private val networkHelper: NetworkHelper) : ViewModel() {
+class CategoryViewModel(apiServices: CategoryServices, private val networkHelper: NetworkHelper) : ViewModel() {
 
-    private val moveRepository = LoginRepository(apiServices)
+    private val moveRepository = CategoryRepository(apiServices)
     val flow = MutableStateFlow<Resource>(Resource.Loading)
 
-    fun getLogin(body: LoginRequest): StateFlow<Resource> {
+    fun getCategory(): StateFlow<Resource> {
         viewModelScope.launch {
             try {
                 if (networkHelper.isNetworkConnected()) {
-                    val response = moveRepository.getLogin(body)
+                    val response = moveRepository.getCategory()
                     if (response.isSuccessful && response.body() != null) {
                         flow.emit(Resource.Success(response.body()!!))
                     } else {
