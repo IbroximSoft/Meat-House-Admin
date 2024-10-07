@@ -54,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
                 warningToast(this@LoginActivity, "Paro'l kiriting")
             } else {
                 val networkHelper = NetworkHelper(this@LoginActivity)
-                val viewModel = LoginViewModel(ApiClient.apiServices, networkHelper)
+                val viewModel = LoginViewModel(ApiClient.apiLoginServices, networkHelper)
                 val model = LoginRequest(phone = phone, password = password)
                 viewModel.getLogin(body = model)
 
@@ -88,8 +88,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun savePreferencesNetworkData(requestLogin: LoginResponse, phone: String) {
-        val limit = requestLogin.access
-        Preferences.token = limit
+        val token = requestLogin.access
+        Preferences.token = token
         Preferences.phone = phone
 
         successToast(this@LoginActivity, "Muvoffaqiyatli!")

@@ -21,8 +21,8 @@ object Preferences {
         }
 
     var phone: String
-        get() = preferences.getString(Preferences::token.name, "")!!
+        get() = preferences.getString(Preferences::phone.name, "")!!
         set(value) {
-            preferences.edit().putString(Preferences::token.name, value).apply()
+            preferences.edit().putString(Preferences::phone.name, value).apply()
         }
 }

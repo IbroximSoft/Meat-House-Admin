@@ -75,7 +75,13 @@ dependencies {
     implementation(libs.viewModel.lifecycle)
     implementation(libs.viewModel.runtime)
 
-    //ViewModel
+    //Retrofit
     implementation(libs.squareup.retrofit)
     implementation(libs.converter.retrofit)
+
+    // interceptor
+    debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
+    releaseImplementation ("com.github.chuckerteam.chucker:library-no-op:4.0.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
 }

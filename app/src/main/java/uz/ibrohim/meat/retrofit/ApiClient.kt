@@ -1,8 +1,11 @@
 package uz.ibrohim.meat.retrofit
 
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import uz.ibrohim.meat.App
+import uz.ibrohim.meat.category.services.CategoryServices
 import uz.ibrohim.meat.login.services.LoginServices
 
 object ApiClient {
@@ -19,10 +22,10 @@ object ApiClient {
 
     // Response code test
     var client: OkHttpClient = OkHttpClient.Builder()
-//        .addInterceptor(ChuckerInterceptor(App.instance))
+        .addInterceptor(ChuckerInterceptor(App.instance))
         .build()
 
-
-    val apiServices: LoginServices = getRetrofit().create(LoginServices::class.java)
+    val apiLoginServices: LoginServices = getRetrofit().create(LoginServices::class.java)
+    val apiCategoryServices: CategoryServices = getRetrofit().create(CategoryServices::class.java)
 
 }
